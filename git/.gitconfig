@@ -1,0 +1,12 @@
+[user]
+	email = marti.serra.coscollano@gmail.com
+	name = Marti Serra
+	useconfigonly = true
+	signingkey=268D104B8A31C918
+[core]
+	editor = nano
+	whitespace = fix,-indent-with-non-tab,trailing-space
+[gpg]
+	program = gpg2
+[commit]
+	gpgSign = false 
