@@ -18,6 +18,7 @@ export EDITOR='nano'
 
 # Aliases
 alias nano='nano -w'
+alias subl='sublime'
 alias cp='cp -v'
 alias mv='mv -v'
 alias rm='rm -v'
