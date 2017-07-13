@@ -1,5 +1,33 @@
+
+# Highlight the user name when logged in as root.
+if [[ "${USER}" == "root" ]]; then
+	userStyle="${red}";
+else
+	userStyle="${orange}";
+fi;
+
+# Highlight the hostname when connected via SSH.
+if [[ "${SSH_TTY}" ]]; then
+	hostStyle="${bold}${red}";
+else
+	hostStyle="${yellow}";
+fi;
+
+# Editor
+export EDITOR='nano'
+
 # Aliases
 alias nano='nano -w'
+alias cp='cp -v'
+alias mv='mv -v'
+alias rm='rm -v'
+alias mkdir='mkdir -v'
+alias ll='ls -FGlAhp'
+alias cd..='cd ..'
 alias ..='cd ..'
-alias .='cd .'
-alias ls='ls --color=auto'
+alias .2='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
+alias cd='cd ~'
+mkcd () {mkdir -p "$1" && cd "$1"; }

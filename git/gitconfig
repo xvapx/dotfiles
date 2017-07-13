@@ -1,12 +1,50 @@
 [user]
-	email = marti.serra.coscollano@gmail.com
-	name = Marti Serra
-	useconfigonly = true
-	signingkey=268D104B8A31C918
+    email = marti.serra.coscollano@gmail.com
+    name = Marti Serra
+    useconfigonly = true
+    signingkey=268D104B8A31C918
+
 [core]
-	editor = nano
-	whitespace = fix,-indent-with-non-tab,trailing-space
+    editor = nano
+    whitespace = fix,-indent-with-non-tab,trailing-space
+
 [gpg]
-	program = gpg2
+    program = gpg2
+
 [commit]
-	gpgSign = false 
+    gpgSign = false 
+
+[alias]
+    aa = add --all
+
+# colors from https://github.com/dotphiles/dotphiles/blob/master/git/gitconfig
+[color]
+    branch = always
+    diff = always
+    grep = always
+    interactive = always
+    pager = true
+    showbranch = auto
+    status = auto
+    ui = always
+
+[color "interactive"]
+    error = red bold
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = yellow
+    frag = magenta
+    old = red
+    new = green
+    whitespace = white reverse
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+    branch = magenta
