@@ -30,5 +30,5 @@ alias .2='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
-alias cd='cd ~'
-mkcd () {mkdir -p "$1" && cd "$1"; }
+alias ~='cd ~'
+mkcd() { mkdir -p "$1" && cd "$1"; }
