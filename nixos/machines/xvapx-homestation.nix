@@ -146,18 +146,18 @@ in
 ######################################## /HARDWARE
 ######################################## SOFTWARE
 
-	nixpkgs.config = {
-	  allowUnfree = true;
-	  permittedInsecurePackages = [ ];
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [ ];
 
-	};
+  };
 
   # List packages installed in system profile. 
-  environment.systemPackages = with default; with channels; [
+  environment.systemPackages = with default; with channels;[
 
     # dotfiles
     dotfiles.xvapx
-    
+
     # dev
     automake
     binutils
@@ -383,11 +383,30 @@ in
 ######################################## /MAINTENANCE
 ######################################## DOTFILES
 
-	system.activationScripts = with default; with channels; {
+  system.activationScripts = with default; with channels;{
     dotfiles = 
     ''
-      cp -fsr ${dotfiles.xvapx}/. /home/xvapx/
-      cp -fsr ${dotfiles.xvapx}/. /root/
+      # symlink all the files in $1 to $2, $1 needs to be an absolute path
+      linkdir() {
+        for f in $(find $1 -maxdepth 1 -type f -printf '%P\n'); do
+          ln -s -b -v $1/$f $2/$f;
+        done
+      }
+
+      # recursively symlink all the files in $1 to $2
+      reclink () {
+        linkdir $1 $2
+        for d in $(find $1 -type d -printf '%P\n'); do
+          mkdir -p -v $2/$d;
+          linkdir $1/$d $2/$d;
+        done
+      };
+
+      reclink ${dotfiles.xvapx} /home/xvapx
+      reclink ${dotfiles.xvapx} /root
+
+      unset -f reclink
+      unset -f linkdir
     '';
   };
 ######################################## /DOTFILES

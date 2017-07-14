@@ -29,6 +29,6 @@ rec {
   dotfiles = import (fetchTarball https://github.com/xvapx/nixos-dotfiles/archive/master.tar.gz) {};
 
   # Local dotfiles
-  local-dotfiles = import (/mnt/projectes/nixos-dotfiles) {};
+  #local-dotfiles = import (/mnt/projectes/nixos-dotfiles) {};
 
 }
