@@ -1,0 +1,6 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=conky
+Type=Application
+Exec=conky
+Terminal=false
