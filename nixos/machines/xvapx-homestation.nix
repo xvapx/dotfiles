@@ -168,10 +168,10 @@ in
     git
     gnumake
     llvm
-    qtcreator
+    openssl.dev
+    pkgconfig
     subversion
-
-    # testing
+    zlib.dev
 
     # editors
     emacs
@@ -179,6 +179,7 @@ in
     gimp
     libreoffice
     openscad
+    qtcreator
     sublime3
 
     # browsers
@@ -194,13 +195,14 @@ in
     geeqie
     nixos-unstable-small.tribler
     vlc
+    mupdf
 
     # files
     bashburn
     brasero
     cdrkit
     grive2
-    p7zip
+    
 
     # system
     cifs_utils
@@ -220,13 +222,11 @@ in
     nmap
     nox
     ntfs3g
-    openssl.dev
     pciutils
-    pkgconfig
     posix_man_pages
     psmisc
     lm_sensors
-    mupdf
+    radeontop
     rsync
     screen
     smartmontools
@@ -238,7 +238,8 @@ in
     wget
     xclip
     xdotool
-    zlib.dev
+    p7zip
+    
 
     # KDE plasma
     ark
@@ -279,10 +280,12 @@ in
     nixos-unstable-small.qjoypad
     nixos-unstable-small.python27Packages.ds4drv
 
-    # interaction
+    # security
     gnupg
-    hexchat
     keepass
+
+    # social
+    hexchat
   ];
 
   
