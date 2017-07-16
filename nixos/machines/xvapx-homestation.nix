@@ -202,12 +202,12 @@ in
     brasero
     cdrkit
     grive2
-    
 
     # system
     cifs_utils
     conky
     curl
+    dmidecode
     file
     gist
     glxinfo
@@ -239,7 +239,6 @@ in
     xclip
     xdotool
     p7zip
-    
 
     # KDE plasma
     ark
@@ -286,9 +285,10 @@ in
 
     # social
     hexchat
-  ];
 
-  
+    # others
+    googleearth
+  ];
 
 ######################################## /SOFTWARE
 ######################################## FONTS
@@ -419,7 +419,12 @@ in
 
 ######################################## /TESTS
 ######################################## SECURITY
-
+security = {
+  sudo = {
+    enable = true;
+    wheelNeedsPassword = false;
+  };
+};
 #security.hideProcessInformation = true;
 
 ######################################## /SECURITY
