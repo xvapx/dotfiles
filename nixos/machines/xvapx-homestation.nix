@@ -206,6 +206,7 @@ in
     grive2
 
     # system
+    cabextract
     cifs_utils
     conky
     curl
@@ -274,7 +275,11 @@ in
     nixos-unstable-small.retroarch                      # multi-system
     nixos-unstable-small.dolphin                        # nintendo gamecube, wii
     nixos-unstable-small.pcsx2                          # sony playstation 2
-    nixos-unstable-small.wine                           # microsoft windows
+    (nixos-unstable-small.wine.override {              # microsoft windows
+      wineRelease = "staging";
+      wineBuild = "wineWow";
+    })
+    nixos-unstable-small.winetricks
 
     # gamepads
     nixos-unstable-small.sdl-jstest
