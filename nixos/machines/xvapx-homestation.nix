@@ -222,6 +222,7 @@ in
     lshw
     lsof
     manpages
+    mono
     nix-prefetch-scripts
     nmap
     nox
