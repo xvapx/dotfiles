@@ -174,9 +174,12 @@ in
     zlib.dev
 
     # editors
+    audacity
     emacs
     blender
     gimp
+    inkscape
+    krita
     libreoffice
     openscad
     qtcreator
@@ -188,7 +191,6 @@ in
     google-chrome
 
     # multimedia
-    audacity
     nixos-unstable-small.clementine
     comical
     ffmpeg
