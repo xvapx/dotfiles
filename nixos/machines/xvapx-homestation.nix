@@ -206,6 +206,7 @@ in
     grive2
 
     # system
+    bc
     cabextract
     cifs_utils
     conky
