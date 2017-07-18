@@ -297,6 +297,9 @@ in
     # social
     hexchat
 
+    # interpreters
+    python
+
     # others
     googleearth
   ];
