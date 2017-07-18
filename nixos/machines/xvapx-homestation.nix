@@ -195,7 +195,6 @@ in
     comical
     ffmpeg
     geeqie
-    nixos-unstable-small.tribler
     vlc
     mupdf
 
@@ -204,6 +203,8 @@ in
     brasero
     cdrkit
     grive2
+    transgui
+    nixos-unstable-small.tribler
 
     # system
     bc
@@ -272,6 +273,7 @@ in
     rogue
     (steam.override { newStdcpp = true; })
     (steam.override { nativeOnly = true; newStdcpp = true; }).run
+    lgogdownloader
 
     # emulators
     nixos-unstable-small.retroarch                      # multi-system
