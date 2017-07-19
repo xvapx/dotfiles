@@ -205,6 +205,7 @@ in
     grive2
     transgui
     nixos-unstable-small.tribler
+    innoextract
 
     # system
     bc
