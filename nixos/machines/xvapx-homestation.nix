@@ -278,6 +278,7 @@ in
     (steam.override { newStdcpp = true; })
     (steam.override { nativeOnly = true; newStdcpp = true; }).run
     lgogdownloader
+    playonlinux
 
     # emulators
     nixos-unstable-small.retroarch                      # multi-system
