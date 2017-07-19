@@ -240,6 +240,9 @@ in
     strace
     telnet
     tree
+    unrar
+    unshield
+    unzip
     usbutils
     #nixpkgs-master.vulnix #fails to download zope.testing
     wget
