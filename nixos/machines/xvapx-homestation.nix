@@ -211,6 +211,7 @@ in
     bc
     cabextract
     cifs_utils
+    nixpkgs-master.clac
     conky
     curl
     dmidecode
