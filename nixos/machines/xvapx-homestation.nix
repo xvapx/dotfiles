@@ -239,6 +239,7 @@ in
     smartmontools
     strace
     telnet
+    terminator
     tree
     unrar
     unshield
