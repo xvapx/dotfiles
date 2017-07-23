@@ -156,7 +156,8 @@ in
   environment.systemPackages = with default; with channels;[
 
     # dotfiles
-    dotfiles.xvapx
+    local-dotfiles.xvapx
+    local-dotfiles.nixos
 
     # dev
     automake
@@ -417,7 +418,7 @@ in
         done
       }
 
-      # recursively symlink all the files in $1 to $2
+      # recursively symlink all the files in $1 to $2, $1 needs to be an absolute path
       reclink () {
         linkdir $1 $2
         for d in $(find $1 -type d -printf '%P\n'); do
@@ -426,8 +427,10 @@ in
         done
       };
 
-      reclink ${dotfiles.xvapx} /home/xvapx
-      reclink ${dotfiles.xvapx} /root
+      reclink ${local-dotfiles.xvapx} /home/xvapx
+      reclink ${local-dotfiles.xvapx} /root
+      mkdir /root/test
+      reclink ${local-dotfiles.nixos} /root/test
 
       unset -f reclink
       unset -f linkdir
