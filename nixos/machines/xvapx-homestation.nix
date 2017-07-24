@@ -156,8 +156,8 @@ in
   environment.systemPackages = with default; with channels;[
 
     # dotfiles
-    local-dotfiles.xvapx
-    local-dotfiles.nixos
+    dotfiles.xvapx
+    dotfiles.nixos
 
     # dev
     automake
@@ -287,7 +287,7 @@ in
     nixos-unstable-small.retroarch                      # multi-system
     nixos-unstable-small.dolphin                        # nintendo gamecube, wii
     nixos-unstable-small.pcsx2                          # sony playstation 2
-    (nixos-unstable-small.wine.override {              # microsoft windows
+    (nixos-unstable-small.wine.override {               # microsoft windows
       wineRelease = "staging";
       wineBuild = "wineWow";
     })
@@ -387,7 +387,7 @@ in
       options = "--delete-older-than 20d";
     };
     # Use sandbox to build packages
-    useSandbox = false;
+    useSandbox = true;
     maxJobs = lib.mkDefault 4;
     buildCores = 0;
     readOnlyStore = true;
@@ -427,10 +427,9 @@ in
         done
       };
 
-      reclink ${local-dotfiles.xvapx} /home/xvapx
-      reclink ${local-dotfiles.xvapx} /root
-      mkdir /root/test
-      reclink ${local-dotfiles.nixos} /root/test
+      reclink ${dotfiles.xvapx} /home/xvapx
+      reclink ${dotfiles.xvapx} /root
+      reclink ${dotfiles.nixos} /root
 
       unset -f reclink
       unset -f linkdir
