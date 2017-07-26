@@ -11,7 +11,7 @@ machine-name = "xvapx-server";
 system.stateVersion = "17.03";
 
 # Import channels
-channels = import ../channels.nix;
+channels = import ../software/channels.nix;
 
 #default channel for this machine
 default = channels.nixos-1703;
