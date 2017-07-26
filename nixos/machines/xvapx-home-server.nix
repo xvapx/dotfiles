@@ -275,7 +275,7 @@ in
     config = ''
       network_interface=enp2s0
       friendly_name=Servidor
-      notify_interval=60
+      notify_interval=10
       inotify=yes
       listening_ip=192.168.1.10
       serial=12345678
