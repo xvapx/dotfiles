@@ -1,6 +1,4 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# machines/xvapx-home-server.nix
 
 { config, pkgs, lib, ... }:
 
@@ -9,27 +7,29 @@ let
 
 machine-name = "xvapx-server";
 
-channels = import ../channels.nix;
-
 # The NixOS release to be compatible with for stateful data such as databases.
 system.stateVersion = "17.03";
+
+# Import channels
+channels = import ../channels.nix;
 
 #default channel for this machine
 default = channels.nixos-1703;
 
 #################################### /MACHINE
 in
-
 {
 #################################### IMPORTS
 
   imports = [ 
       # ENVIRONMENT
-      ../environment.nix
+      ../env/xvapx.nix
       # LOCALIZATION
-      ../localization.nix
+      ../localization/en_US-es.nix
       # USERS
-      ../home-users.nix
+      ../users/xvapx-home.nix
+      # TERMINAL SERVER
+      ../software/terminal-server.nix
     ];
 
 #################################### /IMPORTS
@@ -111,6 +111,9 @@ in
         8200   # miniDLNA
         4242   # crashplan
         4243   # crashplan
+        5900   # terminal-server
+        9091   # transmission RPC interface
+        51413  # transmission
       ];
       allowedUDPPorts = [ 
         137    # Samba Netbios Name Service
@@ -123,30 +126,70 @@ in
 #################################### /HARDWARE
 #################################### SOFTWARE
 
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [ ];
+  };
+
   # List packages installed in system profile. To search by name, run:
-  environment.systemPackages = with pkgs; [
-    chromium
-    crashplan
-    firefox
-    file
+  environment.systemPackages = with default; with channels;[
+
+    # dotfiles
+    dotfiles.xvapx
+    dotfiles.nixos
+
+    # dev
     git
-    gnupg
+
+    # editors
+    emacs
+    nano
+    sublime3
+
+    # browsers
+    elinks
+    chromium
+    firefox
+
+    # files
+    grive2
+    p7zip
+    transmission_remote_gtk
+
+    # system
+    cifs_utils
+    curl
+    crashplan
+    file
     gparted
+    htop
     inotifyTools
-    libreoffice
+    iptables
+    lshw
     lsof
+    manpages
     nmap
-    rogue
+    nox
+    pciutils
+    posix_man_pages
+    psmisc
+    rsync
+    screen
     samba
     smartmontools
+    strace
     swt
     telnet
+    tigervnc
+    tree
     unrar
-    vlc
+    usbutils
     wget
-  ];
+    xclip
 
-  nixpkgs.config = import ./nixpkgs-config.nix;
+    # security
+    gnupg
+  ];
 
 #################################### /SOFTWARE
 #################################### FONTS
@@ -163,7 +206,6 @@ in
       };
     };
     fonts = with default; with channels; [
-      corefonts
       dejavu_fonts
       freefont_ttf
       google-fonts
@@ -187,7 +229,7 @@ in
     securityType = "user";
     extraConfig = ''
       [global]
-      workgroup = HOME
+      workgroup = VEGANS
       server string = servidor
       netbios name = servidor
       interfaces = enp2s0
@@ -208,6 +250,18 @@ in
       guest ok = no
       valid users = SMBread SMBwrite
       read list = SMBread 
+      write list = SMBwrite
+      create mask = 0755
+      directory mask = 0755
+
+      [downloads]
+      comment = Downloads
+      path = /mnt/magatzem/downloads
+      browseable = yes
+      read only = yes
+      guest ok = no
+      valid users = SMBread SMBwrite
+      read list = SMBread
       write list = SMBwrite
       create mask = 0755
       directory mask = 0755
@@ -240,6 +294,7 @@ in
     autorun = true;
     displayManager.lightdm.enable = true;
     desktopManager.xfce.enable = true;
+    desktopManager.default = "xfce";
     exportConfiguration = true;
     # touchpad
     synaptics.enable = true;
@@ -271,15 +326,26 @@ in
   # avoid suspending when closing the lid
   services.logind.extraConfig = "HandleLidSwitch=ignore";
 
-  # Wireless Access Point
-  #services.hostapd = {
-  #  enable = true;
-  #  interface = "wlp0s29f7u5";
-  #  ssid = "invitados";
-  #  channel = 3;
-  #  wpa = true;
-  #  wpaPassphrase = "Hunter2"; 
-  #};
+  # Guests Wireless Access Point
+  services.hostapd = {
+    enable = true;
+    interface = "wlp0s29f7u5";
+    ssid = "invitados";
+    channel = 3;
+    wpa = true;
+    wpaPassphrase = "Password Wifi 2017.";
+  };
+
+  # Transmission bittorrent
+  services.transmission = {
+    enable = true;
+    settings = {
+      download-dir = "/mnt/magatzem/downloads/transmission/complete";
+      incomplete-dir =  "/mnt/magatzem/downloads/transmission/incomplete";
+      incomplete-dir-enabled = true;
+      rpc-whitelist = "127.0.0.1,192.168.1.*";
+    };
+  };
 
 #################################### /SERVICES
 #################################### MAINTENANCE
@@ -318,5 +384,43 @@ in
   '';  
 
 #################################### /MAINTENANCE
+######################################## DOTFILES
 
+  system.activationScripts = with default; with channels;{
+    dotfiles =
+    ''
+      # symlink all the files in $1 to $2, $1 needs to be an absolute path
+      linkdir() {
+        for f in $(find $1 -maxdepth 1 -type f -printf '%P\n'); do
+          ln -s -b -v $1/$f $2/$f;
+        done
+      }
+
+      # recursively symlink all the files in $1 to $2, $1 needs to be an absolute path
+      reclink () {
+        linkdir $1 $2
+        for d in $(find $1 -type d -printf '%P\n'); do
+          mkdir -p -v $2/$d;
+          linkdir $1/$d $2/$d;
+        done
+      };
+
+      reclink ${dotfiles.xvapx} /home/xvapx
+      reclink ${dotfiles.xvapx} /root
+      reclink ${dotfiles.nixos} /root
+
+      unset -f reclink
+      unset -f linkdir
+    '';
+  };
+######################################## /DOTFILES
+######################################## SECURITY
+security = {
+  sudo = {
+    enable = true;
+    wheelNeedsPassword = false;
+  };
+};
+
+######################################## /SECURITY
 }
