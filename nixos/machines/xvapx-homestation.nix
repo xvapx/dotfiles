@@ -1,5 +1,3 @@
-# machines/xvapx-homestation.nix
-
 { config, pkgs, lib, ... }:
 
 let
@@ -10,16 +8,20 @@ machine-name = "xvapx-homestation";
 # The NixOS release to be compatible with for stateful data such as databases.
 system.stateVersion = "unstable";
 
+######################################## /MACHINE
+######################################## CHANNELS
+
 # Import channels
 channels = import ../software/channels.nix;
 
-#default channel for this machine
+# Default channel for this machine
 default = channels.nixos-1703;
 
-######################################## /MACHINE
+######################################## /CHANNELS
+######################################## IMPORTS
+
 in
 {
-######################################## IMPORTS
 
   # Import configuration files
   imports = [ 
@@ -62,11 +64,7 @@ in
       ];
     kernelModules = [ 
       "kvm-intel"
-      # See console messages during early boot.
-      #"fbcon" 
     ];
-    # Disable console blanking after being idle.
-    #kernelParams = [ "consoleblank=0" ];
     extraModulePackages = [ ];
     # Clean /tmp on boot.
     cleanTmpDir = true;
@@ -356,6 +354,7 @@ in
   
   # ssh
   services.openssh.enable = true;
+  programs.ssh.startAgent = true;
  
   # smartd to monitor HDD health
   services.smartd = {
