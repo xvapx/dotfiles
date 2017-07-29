@@ -181,13 +181,14 @@ in
     krita
     libreoffice
     openscad
-    qtcreator
+    #qtcreator
     sublime3
+    fontforge
 
     # browsers
     elinks
     firefox
-    google-chrome
+    nixpkgs-master.google-chrome
 
     # multimedia
     nixos-unstable-small.clementine
@@ -301,6 +302,7 @@ in
     keepass
 
     # social
+    discord
     hexchat
 
     # interpreters
@@ -319,7 +321,7 @@ in
     enableGhostscriptFonts = true;
     fontconfig = {
       defaultFonts = {
-        monospace = [ "Inconsolata" ];
+        monospace = [ "Noto Mono" ];
         sansSerif = [ "Open Sans" ];
         serif     = [ "Linux Libertine" ];
       };
