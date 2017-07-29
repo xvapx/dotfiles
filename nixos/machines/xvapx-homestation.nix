@@ -175,14 +175,8 @@ in
     # editors
     audacity
     emacs
-    blender
-    gimp
-    inkscape
-    krita
     libreoffice
-    openscad
     #qtcreator
-    sublime3
     fontforge
 
     # browsers
@@ -310,7 +304,11 @@ in
 
     # others
     googleearth
-  ];
+  ]
+  ++ import ../software/editors-image.nix { default = default; channels = channels; }
+  ++ import ../software/editors-text.nix { default = default; channels = channels; }
+  ++ import ../software/editors-3d.nix { default = default; channels = channels; }
+  ++ import ../software/dev-base.nix { default = default; channels = channels; };
 
 ######################################## /SOFTWARE
 ######################################## FONTS
