@@ -181,6 +181,7 @@ in
 
     # others
     googleearth
+    tigervnc
   ]
   ++ import ../software/dev-base.nix { default = default; channels = channels; }
   ++ import ../software/editors-documents.nix { default = default; channels = channels; }
