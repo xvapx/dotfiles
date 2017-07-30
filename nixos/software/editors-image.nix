@@ -1,6 +1,6 @@
 { default, channels }:
 with default; with channels;[
-  gimp
-  inkscape
-  krita
+  gimp       # GNU Image Manipulation Program
+  inkscape   # Vector graphics editor
+  krita      # Painting program
 ]

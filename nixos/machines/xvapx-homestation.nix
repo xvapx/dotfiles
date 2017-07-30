@@ -158,157 +158,42 @@ in
     dotfiles.nixos
 
     # dev
-    automake
-    binutils
-    clang
-    cmake
-    gcc
-    gdb
-    git
-    gnumake
-    llvm
     openssl.dev
-    pkgconfig
-    subversion
+    python
     zlib.dev
 
     # editors
-    audacity
-    emacs
-    libreoffice
-    #qtcreator
     fontforge
 
-    # browsers
-    elinks
-    firefox
-    nixpkgs-master.google-chrome
-
-    # multimedia
-    nixos-unstable-small.clementine
-    comical
-    ffmpeg
-    geeqie
-    vlc
-    mupdf
-
     # files
-    bashburn
-    brasero
-    cdrkit
     grive2
     transgui
     nixos-unstable-small.tribler
-    innoextract
 
-    # system
-    bc
-    cabextract
-    cifs_utils
-    nixpkgs-master.clac
-    conky
-    curl
-    dmidecode
-    file
-    gist
-    glxinfo
-    gparted
-    hddtemp
-    htop
-    iptables
-    lshw
-    lsof
-    manpages
-    mono
-    nix-prefetch-scripts
-    nmap
-    nox
-    ntfs3g
-    pciutils
-    posix_man_pages
-    psmisc
-    lm_sensors
-    radeontop
-    rsync
-    screen
-    smartmontools
-    strace
-    telnet
-    terminator
-    tree
-    unrar
-    unshield
-    unzip
-    usbutils
-    #nixpkgs-master.vulnix #fails to download zope.testing
-    wget
-    xclip
-    xdotool
-    p7zip
-
-    # KDE plasma
-    ark
+    # radio
     bluedevil
-    dolphin
-    ffmpegthumbs
-    frameworkintegration
-    kde-gtk-config
-    gwenview
-    okular
-    kate
-    kactivitymanagerd
-    kcalc
-    kdeplasma-addons
-    kinfocenter
-    kmenuedit
-    konsole
-    kscreen
-    ksysguard
-    oxygen
-    oxygen-icons5
-    plasma-workspace-wallpapers
-
-    # games
-    crawlTiles
-    rogue
-    (steam.override { newStdcpp = true; })
-    (steam.override { nativeOnly = true; newStdcpp = true; }).run
-    lgogdownloader
-    playonlinux
-
-    # emulators
-    nixos-unstable-small.retroarch                      # multi-system
-    nixos-unstable-small.dolphin                        # nintendo gamecube, wii
-    nixos-unstable-small.pcsx2                          # sony playstation 2
-    (nixos-unstable-small.wine.override {               # microsoft windows
-      wineRelease = "staging";
-      wineBuild = "wineWow";
-    })
-    nixos-unstable-small.winetricks
 
     # gamepads
     nixos-unstable-small.sdl-jstest
     nixos-unstable-small.qjoypad
     nixos-unstable-small.python27Packages.ds4drv
 
-    # security
-    gnupg
-    keepass
-
-    # social
-    discord
-    hexchat
-
-    # interpreters
-    python
-
     # others
     googleearth
   ]
+  ++ import ../software/dev-base.nix { default = default; channels = channels; }
+  ++ import ../software/editors-documents.nix { default = default; channels = channels; }
   ++ import ../software/editors-image.nix { default = default; channels = channels; }
-  ++ import ../software/editors-text.nix { default = default; channels = channels; }
-  ++ import ../software/editors-3d.nix { default = default; channels = channels; }
-  ++ import ../software/dev-base.nix { default = default; channels = channels; };
+  ++ import ../software/editors-modelling.nix { default = default; channels = channels; }
+  ++ import ../software/editors-multimedia.nix { default = default; channels = channels; }
+  ++ import ../software/emulators.nix { default = default; channels = channels; }
+  ++ import ../software/games.nix { default = default; channels = channels; }
+  ++ import ../software/multimedia.nix { default = default; channels = channels; }
+  ++ import ../software/plasma5.nix { default = default; channels = channels; }
+  ++ import ../software/social.nix { default = default; channels = channels; }
+  ++ import ../software/system-cli.nix { default = default; channels = channels; }
+  ++ import ../software/system-gui.nix { default = default; channels = channels; }
+  ;
 
 ######################################## /SOFTWARE
 ######################################## FONTS
