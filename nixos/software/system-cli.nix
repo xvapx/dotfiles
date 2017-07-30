@@ -35,7 +35,7 @@ with default; with channels;[
   unar                         # Archive unpacker program
   unshield                     # Tool and library to extract CAB files from InstallShield installers
   usbutils                     # USB utilities
-  vulnix                       # Vulnerability scanner for nix
+  #vulnix                       # Vulnerability scanner for nix, fails to download zope.testing
   wget                         # Utility for non-interactive download of files from the Web
   p7zip                        # Command line port of 7-Zip for POSIX systems
 ]
