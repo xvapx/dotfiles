@@ -161,6 +161,7 @@ in
     openssl.dev
     python
     zlib.dev
+    nixpkgs-master.android-studio
 
     # editors
     fontforge
@@ -240,6 +241,10 @@ in
   # ssh
   services.openssh.enable = true;
   programs.ssh.startAgent = true;
+
+  # Android Debug Bridge
+  programs.adb.enable = true;
+  users.extraUsers.xvapx.extraGroups = [ "adbusers" ];
  
   # smartd to monitor HDD health
   services.smartd = {
@@ -249,6 +254,13 @@ in
       { device = "/dev/sdb"; options = "-d sat"; }
     ];
     defaults.monitored = "-a -o on -S on -s (O/../.././(00|06|12|18)|S/../.././03|L/../../1/04) -W 5,35,45";
+  };
+
+  # redshift
+  services.redshift = {
+    enable = true;
+    latitude = "41.421000";
+    longitude = "2.155000";
   };
 
   # NixOS Manual
