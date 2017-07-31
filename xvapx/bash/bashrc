@@ -15,6 +15,8 @@ fi;
 
 # Editor
 export EDITOR='nano'
+export BROWSER='google-chrome'
+export DRIVE='/home/xvapx/gdrive'
 
 # Aliases
 alias nano='nano -w'
