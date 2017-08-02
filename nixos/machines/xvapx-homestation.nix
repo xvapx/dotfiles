@@ -182,6 +182,7 @@ in
     # others
     googleearth
     tigervnc
+    stow
   ]
   ++ import ../software/dev-base.nix { default = default; channels = channels; }
   ++ import ../software/editors-documents.nix { default = default; channels = channels; }
